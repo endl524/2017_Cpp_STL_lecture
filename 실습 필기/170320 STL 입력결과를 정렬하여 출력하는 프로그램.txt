@@ -1,0 +1,43 @@
+
+
+===================
+Mon Mar 20 19:41:54 2017
+===================
+
+
+// 2017 1 STL 17.3.20 월
+
+#include <iostream>
+#include <random>
+#include <algorithm>
+#include <fstream>
+#include <string>
+#include <iterator>
+#include <vector>		// 동적배열
+				// 실행시 크기가 변하는 배열
+#include "save.h"
+using namespace std;
+
+// 1.컴파일 시
+// 2.실행 시
+
+// [문제] 키보드에서 단어를 입력받아 오름차순 정리 후 출력하라.
+
+int main()
+{
+	vector<string> v;
+	
+	copy(istream_iterator<string>(cin), istream_iterator<string>(), back_inserter(v)); // 입력의 끝은 ctrl+z
+	
+	sort(v.begin(), v.end());
+	
+	cout << endl;
+	cout << "정렬된 결과를 출력합니다." << endl;
+
+	for (const string d : v)
+		cout << d << endl;
+
+
+
+	save();
+}

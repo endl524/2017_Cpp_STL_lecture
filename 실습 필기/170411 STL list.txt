@@ -1,0 +1,25 @@
+// 2017 1 STL 17.4.11 화
+
+// 5장. 유틸리티 (C++ 표준문서의 한 chapter)
+// pair/tuple
+// smart pointer
+// data_traits
+// chrono - 시간을 재는 코드
+
+
+// smart pointer
+// unique_ptr - 자원을 독점하는 포인터
+// shared_ptr - 자원을 공유하는 포인터
+
+#include <iostream>
+#include <list>
+#include <algorithm>
+#include "save.h"
+using namespace std;
+
+
+int main()
+{
+	list<int> n[]{ 1, 3, 5, 2, 4 };
+	sort( n.begin(), n.end() );	// list는 메모리가 안붙어있어서 컴파일불가.
+}

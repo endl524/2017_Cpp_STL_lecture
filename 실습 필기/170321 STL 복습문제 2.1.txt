@@ -1,0 +1,99 @@
+
+
+===================
+Tue Mar 21 18:46:00 2017
+===================
+
+
+// 2017 1 STL 17.3.21 화
+
+#include <iostream>
+#include "save.h"
+using namespace std;
+
+int gid { 0 };
+
+// 이동문맥과 r-value 참조자
+// l-value (location value)
+// r-value (순수 r-value (ex)123)와 만료된 l-value (ex)move(a)) )
+
+// 1.4 객체의 동작 관찰 (객체에 id 부여)
+
+// 클래스를 만들 때
+// ! 멤버변수에 *가 있다면- (자원을 확보하려고 하는것.)
+//
+// 1. 생성자에서 자원을 확보한다.
+// 2. 소멸자에서 확보한 자원을 반환한다.
+// 3. 복사생성시 확보한 자원도 복사되도록 한다.
+// 4. 할당시에도 확보한 자원이 복사되어야 한다.
+//
+class Model {
+	char* data;
+	size_t size;
+	int id;
+
+public:
+	Model() : size{ 0 }, data{nullptr}, id(++gid) {
+		cout << id << " - 디폴트생성, " << "크기: " << size << " 번지: " << (void*)data << endl;
+	
+	}
+
+	Model(int n) : size(n), id(++gid) {
+		data = new char[size];	// 메모리 생성 후 시작번지 저장.
+		cout << id << " - 생성자, " << "크기: " << size << " 번지: " << (void*)data << endl;
+	}
+
+	Model(const Model& other) : size(other.size), id(++gid) {
+		data = new char[size];
+		memcpy(data, other.data, size); // data에 other.data를 size만큼 copy하라.
+		cout << id << " - 복사생성자, " << "크기: " << size << " 번지: " << (void*)data << endl;
+	}
+
+	Model(Model&& other) : size(other.size), id(++gid) {
+		data = other.data;
+		other.size = 0;
+		other.data = nullptr;
+		cout << id << " - 이동생성자, " << "크기: " << size << " 번지: " << (void*)data << endl;
+	}
+
+	~Model() {
+		cout << id << " - 소멸자, " << "크기: " << size << " 번지: " << (void*)data << endl;
+
+		if (data != nullptr)
+			delete[] data;
+	}
+
+	Model& operator=(const Model& other) {
+		// 나 자신을 할당할 필요는 없다.
+		if (this == &other)
+			return *this;
+
+		// 1. 내가 확보한 메모리를 지운다.
+		if (data != nullptr)
+			delete[] data;
+
+		// 2. 새로 메모리를 확보한다.
+		size = other.size;
+		data = new char[size];
+
+		// 3. 메모리 내용을 복사한다.
+		memcpy(data, other.data, size);
+
+		cout << id << " - 할당연산자, " << "크기: " << size << " 번지: " << (void*)data << endl;
+
+		return *this;
+	}
+};
+
+int main()
+{
+	Model a(1000);
+	//Model b = move(a);
+	Model b = static_cast<Model&&>(a); // r-value 레퍼런스
+	// 이 문장이 a를 이동시키길 원한다면
+	// 프로그래머가 이동생성자를 제공해야한다.
+
+	save();
+}
+
+// 지역이 끝난뒤 b-a 순으로 소멸자 호출. (stack 이므로.)

@@ -1,0 +1,51 @@
+
+
+===================
+Mon Mar 13 19:41:22 2017
+===================
+
+
+// 2017 1 STL 17.3.6 월 (2주차 1강)
+// 시작퀴즈
+// 한 학기 강의를 저장할 수 있는 save() 함수 작성
+
+#include <iostream>
+#include <random>
+#include <algorithm>
+#include "save.h"
+using namespace std;
+
+bool xxx(int, int);
+
+// 정수 1000개를 임의로 생성하여 오름차순 정렬.
+// 정렬 결과를 파일로 저장해 주세요.
+
+int main()
+{
+	int a[10000];
+	uniform_int_distribution<> ui; // 괄호 안의 숫자는 범위를 나타낸다. default값은 약 +21억..
+	default_random_engine dre;
+	
+	for (int& d : a)
+		d = ui(dre);
+
+	// sort(어디에서, 어디까지, 어떻게);
+	
+	sort(begin(a), end(a), xxx); // begin(a): a배열의 시작, end(a): a배열의 끝
+
+	// 정렬 결과 출력
+
+	for (int d : a) // a의 크기만큼 d (data) 에.. 
+		cout << d << " ";
+	cout << endl;
+
+	save();
+}
+
+bool xxx(int a, int b)
+{
+	return a < b; // strictly weak ordering
+
+	//xxx(200, 133); -> false;
+	//xxx(133, 200); -> true;
+}

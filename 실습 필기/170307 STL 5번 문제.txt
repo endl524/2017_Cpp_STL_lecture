@@ -1,0 +1,38 @@
+
+
+===================
+Tue Mar  7 17:52:56 2017
+===================
+
+
+// 2017 1 STL 17.3.7 화 (1주차 2강)
+// 시작퀴즈
+// 다형성
+// call by value
+// template
+
+#include <iostream>
+#include "save.h"
+using namespace std;
+
+// call by value
+
+void change(int x, int y)
+{
+	int temp = x;
+	x = y;
+	y = temp;
+	
+}
+
+int main()
+{
+	int x = 5, y = 10;
+
+	change(x, y); // call by value (값에 의한 호출)
+				  // change(5, 10); 이므로 실제 x, y값은 안바뀌고
+				  // 단지 5와 10만 바꾸는 의미없는 함수이다.
+
+	cout << x << " " << y << endl;
+	save();
+}

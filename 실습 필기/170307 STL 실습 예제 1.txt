@@ -1,0 +1,34 @@
+
+
+===================
+Tue Mar  7 18:51:58 2017
+===================
+
+
+// 2017 1 STL 17.3.7 화 (1주차 2강)
+
+
+#include <iostream>
+#include "save.h"
+using namespace std;
+
+int cmp(const void* pa, const void* pb) {	// const: 데이터 변경없이 읽기만 해라!
+	// void* : 어떤 타입으로든 편하게 변환해도 됨.
+	return (*(char*)pa) - (*(char*)pb);
+}
+
+int main()
+{
+	// 다음 a를 qsort를 사용하여 오름차순으로 정렬해 주세여.
+	
+	char a[]{ 'a', 'c', 'b', 'e', 'd', '1', '3', '2' };
+
+	// qsort (무엇을?, 몇 개?, 한개의 크기는?, 어떻게?);
+	qsort(a, 8, sizeof(char), cmp);
+
+	for (char d : a)
+		cout << d << " ";
+	cout << endl;
+	
+	save();
+}

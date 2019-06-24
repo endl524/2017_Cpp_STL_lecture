@@ -1,0 +1,34 @@
+
+
+===================
+Mon Mar 27 19:47:54 2017
+===================
+
+
+// 2017 1 STL 17.3.27 월
+
+#include <iostream>
+#include <algorithm>
+#include "save.h"
+using namespace std;
+
+// Lambda - 이름없는 함수로 지역에서 함수의 몸체를 정의할 수 있다.
+// 영역화된 열거형.
+
+
+void f() { cout << "I'm Function!" << endl; };
+
+int main()
+{
+	// () - function call operator
+	auto fp = []() {
+		cout << "Hello, World!" << endl;
+	};	// 정의 후 끝에서 한번 호출 할 수 있다.
+
+	/*while (true)
+		fp();*/
+
+	
+	
+	save();
+}

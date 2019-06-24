@@ -1,0 +1,48 @@
+
+
+===================
+Tue Mar  7 18:15:38 2017
+===================
+
+
+// 2017 1 STL 17.3.7 화 (1주차 2강)
+// 시작퀴즈
+// 다형성
+// call by value
+// template
+
+#include <iostream>
+#include "save.h"
+using namespace std;
+
+// template
+
+template <class T>	// template
+void change(T& x, T& y)
+{
+	T temp = x;
+	x = y;
+	y = temp;
+	
+}
+
+class Wizard {
+	int num;
+public:
+	Wizard(int n) : num(n) {}
+	operator int() { return num; }
+};
+
+int main()
+{
+	int x = 5, y = 10;
+
+	change(x, y); // call by reference
+
+	Wizard a(10), b(20);
+	change(a, b);
+
+	cout << a << " " << b << endl;
+	
+	save();
+}

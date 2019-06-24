@@ -1,0 +1,37 @@
+
+
+===================
+Tue Mar  7 18:57:39 2017
+===================
+
+
+// 2017 1 STL 17.3.7 화 (1주차 2강)
+
+
+#include <iostream>
+#include "save.h"
+using namespace std;
+
+int cmp(const void* pa, const void* pb) {	// const: 데이터 변경없이 읽기만 해라!
+	// void* : 어떤 타입으로든 편하게 변환해도 됨.
+	return (*(int*)pa) - (*(int*)pb);
+}
+
+int main()
+{
+	// 임의의 값을 갖는 정수 10000개를 정렬하고 출력하라
+	
+	int a[10000];
+
+	for (int& d : a)
+		d = rand();
+
+	// qsort (무엇을?, 몇 개?, 한개의 크기는?, 어떻게?);
+	qsort(a, 10000, sizeof(int), cmp);
+
+	for (int d : a)
+		cout << d << " ";
+	cout << endl;
+	
+	save();
+}

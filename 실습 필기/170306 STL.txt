@@ -1,0 +1,62 @@
+
+
+===================
+Mon Mar  6 20:25:44 2017
+===================
+
+
+// 2017 1 STL 17.3.6 월 (1주차 1강)
+// 시작퀴즈
+// 한 학기 강의를 저장할 수 있는 save() 함수 작성
+
+#include <iostream>
+#include "save.h"
+using namespace std;
+
+int main()
+{
+	333; 333;
+	save();
+}
+
+===================
+Mon Mar  6 20:36:19 2017
+===================
+
+
+// 2017 1 STL 17.3.6 월 (1주차 1강)
+// 시작퀴즈
+// 한 학기 강의를 저장할 수 있는 save() 함수 작성
+
+#include <iostream>
+#include "save.h"
+using namespace std;
+
+int main()
+{
+	new int{ 100 }; // 동적메모리 할당하여 int 100으로 초기화
+	save();
+}
+
+===================
+Mon Mar  6 20:40:05 2017
+===================
+
+
+// 2017 1 STL 17.3.6 월 (1주차 1강)
+// 시작퀴즈
+// 한 학기 강의를 저장할 수 있는 save() 함수 작성
+
+#include <iostream>
+#include "save.h"
+using namespace std;
+
+int main()
+{
+	int* a = new int{ 100 }; // 동적메모리 할당하여 int 100으로 초기화
+
+	//*a = 100; // 이건 대입. (할당)
+
+	delete a; // new를 해줬으면 delete는 반드시 해줘야 한다.
+	save();
+}

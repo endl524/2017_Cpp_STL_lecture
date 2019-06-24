@@ -1,0 +1,42 @@
+
+
+===================
+Tue Mar 28 18:42:13 2017
+===================
+
+
+// 2017 1 STL 17.3.28 화
+
+#include <iostream>
+#include <algorithm>
+#include "save.h"
+using namespace std;
+
+
+// callable object (호출가능객체)
+// 객체에 함수호출연산자 () 를 붙여 호출할 수 있는 객체
+// 객체란 메모리를 차지하고 있는 실체.
+//
+// 1. 일반함수
+// 2. 함수포인터
+// 3. 함수객체
+// 4. 람다를 저장한 변수
+// 5. 멤버함수 포인터
+// 6. 바인더가 생성한 객체
+
+int cnt;
+
+bool f(char a, char b) {
+	++cnt;
+	return a > b;	// 내림차순
+}
+
+int main()
+{
+	char s[] = "The quick brown fox jumps over the lazy dog";
+	auto pf = f;	// 함수포인터
+	sort(begin(s), end(s) - 1, pf); // 정렬
+	cout << s << endl;
+	cout << "비교횟수: " << cnt << endl;
+	save();
+}

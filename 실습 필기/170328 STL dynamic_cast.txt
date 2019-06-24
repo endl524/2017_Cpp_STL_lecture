@@ -1,0 +1,73 @@
+
+
+===================
+Tue Mar 28 17:57:55 2017
+===================
+
+
+// 2017 1 STL 17.3.28 화
+
+#include <iostream>
+#include <vector>
+#include "save.h"
+using namespace std;
+
+// 4장. 일반개념
+
+// 4.3 예외처리 - 그림 4.1 표준예외의 계층구조
+// 예외 - 모든 예외는 exception을 상속
+// STL은 속도에 최우선, 예외는 필요하면 프로그래머가 따로 처리해야한다.
+// (예외를 처리하지 않는다.)
+//
+// bad_alloc - 할당해줄 메모리가 없다.
+// bad_cast - dynamic_cast가 실패했다.
+//
+// 호출가능객체
+
+
+// dynamic_cast는 언제 실패하는가?
+
+class Animal {
+public:
+	virtual void move() const = 0;
+};
+
+class Dog : public Animal {
+public:
+	virtual void move() const override final {
+		cout << "개가 뛴다" << endl;
+	};
+};
+
+class Bird : public Animal {
+public:
+	virtual void move() const override final {
+		cout << "새가 난다" << endl;
+	};
+};
+
+
+// RTTI 동작.
+void f( Animal* p ) { // casting (형변환)
+	// 다이나믹 캐스팅을 하는 이유: 찾기 쉬우라고
+	if (dynamic_cast<Dog*>(p) != nullptr) // 포인터가 정상이면
+		p->move();
+	else
+		cout << "원래 개는 아니다" << endl;	// 포인터가 비정상이면 (nullptr라면)
+											// 클래스가 다르면 nullptr를 반환하기 때문.
+	//((Dog*)(p))->move(); // casting (형변환)
+}
+
+int main()
+{
+	
+
+	Animal* ap[]{ new Dog, new Bird, new Dog }; // 다형성(부모클래스를 이용해 자식클래스를 찾아가는것.)
+
+	// 함수 f는 전달된 pointer가 Dog인 경우에만 move()를 호출
+
+	for (int i = 0; i < 3; ++i) {
+		f(ap[i]);
+	}
+	save();
+}

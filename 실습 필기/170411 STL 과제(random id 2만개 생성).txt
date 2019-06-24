@@ -1,0 +1,34 @@
+
+
+===================
+Tue Apr 11 18:48:15 2017
+===================
+
+
+// 2017 1 STL 17.4.11 »≠
+
+// 6¿Â.
+
+#include <iostream>
+#include <set>
+#include <random>
+#include <algorithm>
+#include "save.h"
+using namespace std;
+
+
+
+int main()
+{
+	set<int> s;
+	default_random_engine dre;
+	uniform_int_distribution<> ui;
+	while (s.size() <= 20000)
+		s.insert(ui(dre));
+	/*
+	for (int d : s)
+		cout << d << "\t";
+	cout << endl;*/
+
+	save();
+}

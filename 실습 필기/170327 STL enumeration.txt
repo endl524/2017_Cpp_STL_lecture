@@ -1,0 +1,28 @@
+
+
+===================
+Mon Mar 27 20:08:17 2017
+===================
+
+
+// 2017 1 STL 17.3.27 월
+
+#include <iostream>
+#include "save.h"
+using namespace std;
+
+// 4장
+
+enum class GameStatus { RUN, MENU, PAUSE, EXIT }; // enumeration (숫자화 열거)
+// 정수와 혼용 방지
+
+
+int main()
+{
+	// int n = GameStatus::RUN;
+	// GameStatus s = GameStatus::RUN;
+	// 위 둘은 다르다.
+
+
+	save();
+}

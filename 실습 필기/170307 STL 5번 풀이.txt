@@ -1,0 +1,39 @@
+
+
+===================
+Tue Mar  7 17:57:00 2017
+===================
+
+
+// 2017 1 STL 17.3.7 화 (1주차 2강)
+// 시작퀴즈
+// 다형성
+// call by value
+// template
+
+#include <iostream>
+#include "save.h"
+using namespace std;
+
+// call by value
+
+void change(int* x, int* y)
+{
+	int temp = *x;
+	*x = *y;
+	*y = temp;
+	
+}
+
+int main()
+{
+	int x = 5, y = 10;
+	int a = (int)&x;
+	int b = (int)&y;
+
+	change((int*)a, (int*)b); // call by value (값에 의한 호출)
+
+	cout << x << " " << y << endl;
+	
+	save();
+}

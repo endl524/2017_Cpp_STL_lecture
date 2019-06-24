@@ -1,0 +1,29 @@
+
+
+===================
+Mon Mar 27 20:00:16 2017
+===================
+
+
+// 2017 1 STL 17.3.27 월
+
+#include <iostream>
+#include <algorithm>
+#include "save.h"
+using namespace std;
+
+// 4장.
+// Lambda - 이름없는 함수로 지역에서 함수의 몸체를 정의할 수 있다.
+// 일반함수와 달리 정의된 지역내의 변수에 access할 수 있다.
+// 영역화된 열거형.
+// '이름없는 함수'라고 말하지만 사실 "함수가 아니다".
+
+
+
+int main()
+{
+	auto f = [](int, int) {};
+	// f야 너는 누구니?
+	cout << typeid (f).name() << endl;
+	save();
+}

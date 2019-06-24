@@ -1,0 +1,49 @@
+
+
+===================
+Wed Mar 15 10:21:44 2017
+===================
+
+
+// 2017 1 STL 17.3.14 화 (2주차 2강)
+
+#include <iostream>
+#include <random>
+#include <algorithm>
+#include <fstream>
+#include <string>
+#include "save.h"
+using namespace std;
+
+class Dog {
+	string name;
+	int age;
+
+public:
+	Dog() : name{}, age{ -1 } {}; // default 생성자를 부름.
+	Dog(string name, int n) : name(name), age(n) {}; // 생성자 처리.
+
+	string getName() const { return name; }; // 이름을 받아 읽어주자.
+	void show() const {
+		cout << "이름: " << name << "\t나이: " << age << endl; // 출력을 해주자.
+	};
+};
+
+// 개 10 마리를 생성하여 다음과 같이 초기화 하였다.
+// sort()를 사용하여 이름 순으로 정렬하라.
+
+int main()
+{
+	Dog d[10]{
+		{ "삼월이", 3 },{ "바둑이", 5 },{ "해피", 10 },{ "밍키", 2 },
+		{ "선필이", 24 },{ "일", 1 },{ "이", 2 },{ "사" ,4 },{ "육", 6 },{ "칠", 7 } };
+	
+	// sort(&d[0], &d[10], [](Dog a, Dog b) {return a < b;}); // a.operator < (b)  ->  연산자 오버로딩으로 해결.
+	// 그래서..
+	sort(&d[0], &d[10], [](const Dog& a, const Dog& b) {return a.getName() < b.getName();}); // 람다를 활용하자.
+
+	for (const Dog& d : d) // &: 값을 끌어온다는것. const: 읽기만 한다는것.
+		d.show();
+
+	save();
+}

@@ -1,0 +1,47 @@
+
+
+===================
+Tue Mar  7 17:44:59 2017
+===================
+
+
+// 2017 1 STL 17.3.7 화 (1주차 2강)
+// 시작퀴즈
+// 다형성
+// call by value
+// template
+
+#include <iostream>
+#include "save.h"
+using namespace std;
+
+// 다형성(Polymorphism)
+
+struct Job {
+	virtual void attack() = 0;
+};
+
+struct Wizard : public Job {
+	virtual void attack() override { cout << "마법을 쓴다" << endl; }
+};
+
+struct Archer : public Job { 
+	virtual void attack() override { cout << "활을 쏜다" << endl; }
+};
+
+int main()
+{
+	Job* p[2];
+
+	p[0] = new Wizard;
+	p[1] = new Archer;
+
+	for (int i = 0; i < 2; ++i)
+		p[i]->attack();
+
+	delete p[0];
+	delete p[1];
+
+
+	save();
+}

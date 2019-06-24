@@ -1,0 +1,49 @@
+
+
+===================
+Mon Apr 10 20:17:05 2017
+===================
+
+
+// 2017 1 STL 17.4.10 월
+
+#include <iostream>
+#include <memory>
+#include "save.h"
+using namespace std;
+
+
+// 5장. 유틸리티 (C++ 표준문서의 한 chapter)
+// pair/tuple
+// smart pointer
+// data_traits
+// chrono - 시간을 재는 코드
+
+
+// smart pointer
+// unique_ptr - 자원을 독점하는 포인터
+// shared_ptr - 자원을 공유하는 포인터
+
+class Model {
+public:
+	Model() { cout << "ctor" << endl; }
+	~Model() { cout << "dtor" << endl; }
+};
+
+void f(unique_ptr<Model>&) {	// 1 - 인자에 &(레퍼런스)를 붙여주어 참조한다고 알린다.
+								// 즉, 복사하지 않는다고 알린다.
+	cout << "아무일도 하고 싶지 않다." << endl;
+}
+
+
+int main()
+{
+	unique_ptr<Model> p(new Model);
+			// p가 f로 넘어갈때 복사생성된다. 그러나 이 스마트포인터는 그것을 허용하지않는다.
+			// unique_ptr는 자원을 독점하기 때문이다.
+			// 그렇다면 위의 1로..
+	f(p); // f는 아무일도 안하는 함수.
+	cout << "f 끝" << endl;
+
+	save();
+}

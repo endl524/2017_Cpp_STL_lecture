@@ -1,0 +1,162 @@
+
+
+===================
+Mon Mar 20 19:50:41 2017
+===================
+
+
+// 2017 1 STL 17.3.20 월
+
+#include <iostream>
+#include "save.h"
+using namespace std;
+
+// 1. 문제가 없다.
+
+class Model {
+	char* data;
+	size_t size;
+};
+
+int main()
+{
+	Model a;
+
+	save();
+}
+
+===================
+Mon Mar 20 19:59:22 2017
+===================
+
+
+// 2017 1 STL 17.3.20 월
+
+#include <iostream>
+#include "save.h"
+using namespace std;
+
+// 1.1 객체의 동작 관찰
+
+class Model {
+	char* data;
+	size_t size;
+
+public:
+	Model() {
+		cout << "생성자" << endl;
+	}
+	~Model() {
+		cout << "소멸자" << endl;
+	}
+};
+
+int main()
+{
+	Model a;	// 디폴트 생성자 호출 (지역객체 - 지역에서 만들고 지역에서 사라진다.)
+	a.~Model(); // 소멸자
+	
+	
+	save();
+}
+
+===================
+Mon Mar 20 20:24:01 2017
+===================
+
+
+// 2017 1 STL 17.3.20 월
+
+#include <iostream>
+#include "save.h"
+using namespace std;
+
+// 1.2 객체의 동작 관찰
+
+class Model {
+	char* data;
+	size_t size;
+
+public:
+	Model() : size{ 0 }, data{nullptr} {
+		cout << "디폴트 생성" << endl;
+	}
+
+	Model(int n) : size(n) {
+		data = new char[1000];	// 메모리 생성 후 시작번지 저장.
+		cout << "생성자(int), " << "크기: " << size << " 번지: " << (void*)data << endl;
+	}
+
+	~Model() {
+		cout << "소멸자, " << "크기: " << size << " 번지: " << (void*)data << endl;
+
+		if (data != nullptr)
+			delete[] data;
+	}
+};
+
+int main()
+{
+	Model a;	// 디폴트 생성자 호출 (지역객체 - 지역에서 만들고 지역에서 사라진다.)
+	Model b(1000); // HEAP에 1000 바이트 메모리 생성 후 크기와 시작번지를 저장한다.
+	
+	
+	
+	save();
+}
+
+// 지역이 끝난뒤 b-a 순으로 소멸자 호출. (stack 이므로.)
+
+===================
+Mon Mar 20 20:56:02 2017
+===================
+
+
+// 2017 1 STL 17.3.20 월
+
+#include <iostream>
+#include "save.h"
+using namespace std;
+
+// 1.3 객체의 동작 관찰
+
+class Model {
+	char* data;
+	size_t size;
+
+public:
+	Model() : size{ 0 }, data{nullptr} {
+		cout << "디폴트 생성" << endl;
+	}
+
+	Model(int n) : size(n) {
+		data = new char[1000];	// 메모리 생성 후 시작번지 저장.
+		cout << "생성자(int), " << "크기: " << size << " 번지: " << (void*)data << endl;
+	}
+
+	Model(const Model& other) : size(other.size) {
+		data = new char[size];
+		memcpy(data, other.data, size); // data에 other.data를 size만큼 copy하라.
+		cout << "생성자(int), " << "크기: " << size << " 번지: " << (void*)data << endl;
+	}
+
+	~Model() {
+		cout << "소멸자, " << "크기: " << size << " 번지: " << (void*)data << endl;
+
+		if (data != nullptr)
+			delete[] data;
+	}
+};
+
+int main()
+{
+	Model a;	// 디폴트 생성자 호출 (지역객체 - 지역에서 만들고 지역에서 사라진다.)
+	Model b(1000); // HEAP에 1000 바이트 메모리 생성 후 크기와 시작번지를 저장한다.
+	
+	Model c = b;	// 복사생성 문장 Model c(b);
+					// Model(const Model&);
+	
+	save();
+}
+
+// 지역이 끝난뒤 b-a 순으로 소멸자 호출. (stack 이므로.)

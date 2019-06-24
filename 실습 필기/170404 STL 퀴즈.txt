@@ -1,0 +1,67 @@
+#include <iostream>
+#include <vector>
+#include <chrono>
+#include <random>
+#include <algorithm>
+#include <windows.h>
+using namespace std;
+
+class Test {
+	int n;
+
+public:
+	Test() :n{} {}
+	Test(int n) : n{n} {}
+	int getN() const { return n; }
+	void setN(int val) { n = val; }
+};
+
+
+class Call {
+public:
+	bool operator()(const Test& a, const Test& b) {
+		return a.getN() < b.getN();
+	}
+};
+
+int f(const void* pa, const void* pb) {	
+	return (*(int*)pa) - (*(int*)pb);
+}
+
+int main()
+{
+	vector<Test> v(1000000);
+	default_random_engine dre;
+	uniform_int_distribution<> ui;
+	for (int i = 0; i < v.size(); ++i)
+		v[i].setN(ui(dre));
+	Call ct;
+	//-----------------------------------------------------------------
+	auto start = chrono::system_clock::now();
+
+	sort(v.begin(), v.end(), ct);
+	//sort(v.begin(), v.end(), [](const Test& a, const Test& b) { return a.getN() < b.getN(); });
+	auto end = chrono::system_clock::now();
+	auto diff = end - start;
+	auto msec = chrono::duration_cast<chrono::milliseconds>(diff);
+	cout << "경과시간 - " << msec.count() << "mSec" << endl;
+	//-----------------------------------------------------------------
+
+	/*// 1번 f를 정의
+	qsort(&v[0], 1000000, sizeof(int), f);
+	for (int i = 0; i < v.size(); ++i)
+		v[i].setN(ui(dre));*/
+
+	/*// 2번 ct를 정의
+
+	Call ct;
+	sort(v.begin(), v.end(), ct);
+	for (int i = 0; i < v.size(); ++i)
+		v[i].setN(ui(dre)); */
+
+	// 3번 람다로 정렬
+
+	// 4번 시간재는 코드 삽입하여 세가지 정렬알고리즘의 시간 측정하여 결과값 작성
+
+	// 5번 4번을 설명.
+}

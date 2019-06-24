@@ -1,0 +1,39 @@
+
+교재 살펴보기.
+
+ 1장. STL
+
+* C++
+- C (절차적 언어)
+- OOP (객체 지향 프로그래밍)
+- Generic Programing (타입에 무관한 프로그래밍), (객체의 집합)
+
+
+ 2장. Standard Library
+
+1. C++98 (통일)
+2. C++11
+3. C++17
+
+* 표준이란, 모든 매체에서 실행이 가능한것을 의미한다.
+  표준 코딩이라는 것도 비슷한 맥락으로 이해하면 된다.
+
+* 알고리즘 복잡도 -> 처리되는 데이터의 갯수
+  n개의 처리할 데이터
+  O(1) -> 이런건 있을 수 가 없다.
+  0(n)
+
+
+ 3장. 새 언어 특성
+
+* null 포인터의 표준데이터타입(nullptr)
+-> ex) int* p = nullptr;
+	-> (int)nullptr는 안정성을 파괴한다. (쓰지말것.)
+-> standard def에 나와있다. (#include <stddef.h> ==> <cstddef>)
+
+* auto로 자동데이터형 추론
+-> #include <vector>	// 동적배열 -> 크기가 변하는 배열
+	-> vector<string> v {"aa","bb","cc"};
+-> 일반적으로 C는 기계어로 번역하는 순간 크기를 알려줘야 한다.
+	-> ex) int n[3]; , ex2) int n[] = {123, 123};
+-> #include <string>

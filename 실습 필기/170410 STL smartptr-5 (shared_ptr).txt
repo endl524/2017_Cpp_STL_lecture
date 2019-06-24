@@ -1,0 +1,45 @@
+
+
+===================
+Mon Apr 10 20:31:23 2017
+===================
+
+
+// 2017 1 STL 17.4.10 월
+
+#include <iostream>
+#include <memory>
+#include "save.h"
+using namespace std;
+
+
+// 5장. 유틸리티 (C++ 표준문서의 한 chapter)
+// pair/tuple
+// smart pointer
+// data_traits
+// chrono - 시간을 재는 코드
+
+
+// smart pointer
+// unique_ptr - 자원을 독점하는 포인터
+// shared_ptr - 자원을 공유하는 포인터
+
+class Model {
+public:
+	Model() { cout << "ctor" << endl; }
+	~Model() { cout << "dtor" << endl; }
+};
+
+int main()
+{
+	// 자원을 공유하는 포인터
+	shared_ptr<Model> p(new Model);
+	shared_ptr<Model> q = p;
+	shared_ptr<Model> r = q;
+
+	cout << p.use_count() << endl;	// p와 메모리를 공유하는 포인터의 수를 출력 (3 출력)
+	q.reset();	// q 포인터를 지움.
+	cout << p.use_count() << endl;	// 2 출력
+
+	save();
+}

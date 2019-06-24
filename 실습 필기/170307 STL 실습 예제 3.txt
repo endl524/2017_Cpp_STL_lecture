@@ -1,0 +1,45 @@
+
+
+===================
+Tue Mar  7 19:01:48 2017
+===================
+
+
+// 2017 1 STL 17.3.7 화 (1주차 2강)
+// random();
+
+#include <iostream>
+#include <random>	// ramdom의 최대값을 늘려주기 위한 라이브러리 (기본이 32767이다..)
+#include "save.h"
+using namespace std;
+
+int cmp(const void* pa, const void* pb) {	// const: 데이터 변경없이 읽기만 해라!
+	// void* : 어떤 타입으로든 편하게 변환해도 됨.
+	return (*(int*)pa) - (*(int*)pb);
+}
+
+int main()
+{
+	// 임의의 값을 갖는 정수 10000개를 정렬하고 출력하라
+	
+	int a[10000];
+
+	// 랜덤 넘버 생성하는 방법
+	// 1. 랜덤 엔진을 선택한다.
+	// 2. 확률 분포를 선택한다.
+	// 수의 최대값이 21억 가까이 된다. 
+	default_random_engine dre;
+	uniform_int_distribution<> ui;
+
+	for (int& d : a)
+		d = ui(dre);
+
+	// qsort (무엇을?, 몇 개?, 한개의 크기는?, 어떻게?);
+	qsort(a, 10000, sizeof(int), cmp);
+
+	for (int d : a)
+		cout << d << " ";
+	cout << endl;
+	
+	save();
+}

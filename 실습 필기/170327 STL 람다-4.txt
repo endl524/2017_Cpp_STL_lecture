@@ -1,0 +1,38 @@
+
+
+===================
+Mon Mar 27 19:54:26 2017
+===================
+
+
+// 2017 1 STL 17.3.27 월
+
+#include <iostream>
+#include <algorithm>
+#include "save.h"
+using namespace std;
+
+// 4장.
+// Lambda - 이름없는 함수로 지역에서 함수의 몸체를 정의할 수 있다.
+// 일반함수와 달리 정의된 지역내의 변수에 access할 수 있다.
+// 영역화된 열거형.
+// '이름없는 함수'라고 말하지만 사실 "함수가 아니다".
+
+
+void f() { cout << "I'm Function!" << endl; };
+
+int main()
+{
+	int a[]{ 1, 2, 3, 4, 5, 6, 7, 8, 9, -1 };
+	int num = 0;
+
+	// sort함수가 정렬하려고 람다를 몇번이나 호출할까?
+	sort(begin(a), end(a), [/*람다 캡쳐*/ &num](int a, int b) {
+		++num;
+		return a > b;
+	});
+
+	cout << "sort가 비교한 횟수: " << num << endl;
+	
+	save();
+}

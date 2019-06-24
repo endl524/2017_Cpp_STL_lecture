@@ -1,0 +1,66 @@
+
+
+===================
+Mon Apr  3 19:36:10 2017
+===================
+
+
+// 2017 1 STL 17.4.3 월
+
+#include <iostream>
+#include <random>
+#include <ctime>
+#include "save.h"
+using namespace std;
+
+// 5장. 유틸리티 (C++ 표준문서의 한 chapter)
+// pair/tuple
+// smart pointer
+// data_traits
+// chrono - 시간을 재는 코드
+
+
+// pair - 두 개의 자료형을 하나로 묶어 새 자료형을 만든다.
+
+struct Data {
+	int min;
+	int max;
+};
+
+Data f(int* p, int num)
+{
+	int min = 1000000;
+	int max = -100000;
+
+	for (int i = 0; i < num; ++i) {
+		if (p[i] < min)
+			min = p[i];
+		if (p[i] > max)
+			max = p[i];
+	}
+	Data d;
+
+	d.max = max;
+	d.min = min;
+
+	return d;
+}
+
+int main()
+{
+	int a[100];
+	default_random_engine dre;
+	uniform_int_distribution<> ui(-10000, 10000);
+	dre.seed(time(NULL));
+
+	for (int i = 0; i < 100; ++i)
+		a[i] = ui(dre);
+
+	// 함수 f가 a의 최솟값과 최댓값을 찾아야 한다.
+
+	Data d = f(a, 100);
+
+	cout << d.min << ", " << d.max << endl;
+
+	save();
+}

@@ -1,0 +1,62 @@
+
+
+===================
+Mon Apr  3 20:30:17 2017
+===================
+
+
+// 2017 1 STL 17.4.3 월
+
+#include <iostream>
+#include <algorithm>
+#include <random>
+#include <ctime>
+#include <string>
+#include "save.h"
+using namespace std;
+
+
+// 5장. 유틸리티 (C++ 표준문서의 한 chapter)
+// pair/tuple
+// smart pointer
+// data_traits
+// chrono - 시간을 재는 코드
+
+
+// 2차원 점을 pair로 프로그램 연습
+using Point2D = pair<double, double>; // x, y 좌표
+
+double dist(const Point2D& a)
+{
+	return (a.first*a.first + a.second*a.second);
+}
+
+int main()
+{
+	Point2D p[1000];
+
+	for (int i = 0; i < 1000; ++i) {
+		p[i].first = -100;
+		p[i].second = 100;
+	}
+
+	// x, y 값을 (-100, 100)으로 할당하라.
+	default_random_engine dre;
+	uniform_int_distribution<> ui(-100, 100);
+	for (int i = 0; i < 1000; ++i) {
+		p[i].first = ui(dre);
+		p[i].second = ui(dre);
+	}
+
+	// 원점에서 가까운 순서대로 정렬하라.
+	sort(begin(p), end(p), [](const Point2D& a, const Point2D& b) {
+		return dist(a) < dist(b);
+	});
+
+	// 결과를 출력하라. (x, y)
+	for (int i = 0; i < 1000; ++i) {
+		cout << "(" << p[i].first << "," << p[i].second << ") --- " << p[i].first - p[i].second << endl;
+	}
+
+	save();
+}

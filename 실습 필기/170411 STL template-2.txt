@@ -1,0 +1,47 @@
+// 2017 1 STL 17.4.11 화
+
+// 5장. 유틸리티 (C++ 표준문서의 한 chapter)
+// pair/tuple
+// smart pointer
+// data_traits
+// chrono - 시간을 재는 코드
+
+
+// smart pointer
+// unique_ptr - 자원을 독점하는 포인터
+// shared_ptr - 자원을 공유하는 포인터
+
+#include <iostream>
+#include <memory>
+#include "save.h"
+using namespace std;
+
+
+template <class T>
+void printVal(T n) {
+	 printVal(n, is_pointer<T>());
+}
+
+template <class T>
+void printVal(T n, false_type) {
+	 cout << n << endl;
+}
+
+template <class T>
+void printVal(T n, true_type) {
+	cout << *n << endl;
+}
+
+
+
+int main()
+{
+	int n{ 410 };
+	int* p = &n;
+
+	printVal(3); // 3을 출력
+	printVal(n); // 410을 출력
+	printVal(p); // 410을 출력
+
+	save();
+}

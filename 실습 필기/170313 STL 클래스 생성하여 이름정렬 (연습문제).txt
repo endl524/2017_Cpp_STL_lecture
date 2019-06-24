@@ -1,0 +1,32 @@
+// 2017 1 STL 17.3.6 월 (2주차 1강)
+
+#include <iostream>
+#include <random>
+#include <algorithm>
+#include <fstream>
+#include "save.h"
+using namespace std;
+
+class Dog {
+	string name;
+	int age;
+
+public:
+	void setAge(int a) { age = a; } // age를 넘겨주는 public 함수를 생성.
+	int getAge() const { return age; } // age를 읽어주는 함수 생성.
+
+	void SetName(string n) { name = n; }
+};
+
+// 개 10 마리를 생성하여 다음과 같이 초기화 하였다.
+// sort()를 사용하여 이름 순으로 정렬하라.
+
+int main()
+{
+	Dog dogs[10]{ {"삼월이", 3}, {"바둑이", 5}, {"해피", 10}, {"밍키", 2} };
+
+	sort(begin(dogs), end(dogs));
+	
+
+	// save();
+}

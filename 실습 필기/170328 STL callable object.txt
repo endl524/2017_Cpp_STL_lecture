@@ -1,0 +1,51 @@
+
+
+===================
+Tue Mar 28 18:23:37 2017
+===================
+
+
+// 2017 1 STL 17.3.28 화
+
+#include <iostream>
+#include "save.h"
+using namespace std;
+
+// callable object (호출가능객체)
+// 객체에 함수호출연산자 () 를 붙여 호출할 수 있는 객체
+// 객체란 메모리를 차지하고 있는 실체.
+
+
+// 어떤 클래스가 ()를 오버로딩했다.
+// 그러면 그 클래스의 객체는 호출가능.
+class Test {
+public:
+	void operator()() {
+		cout << "나는 함수 객체" << endl;
+	}
+};
+
+
+void f() { // f()는 HEAP속의 CODE영역에있는 cout 코드의 시작번지를 가리킨다.
+	cout << "나는 그냥 함수" << endl;
+}
+// f는 함수이거나, 함수를 가리키는 포인터.
+// 여기서 다루는 내용은 포인터이다!!
+
+int main()
+{
+	(*f)();
+	f();	// C를 배웠다면 -> void f(void);
+	void(*g)(void) = f;	// 이것은 함수가 아니라 포인터.
+	//auto g = f;	// g는 f를 가리키는 포인터.
+	g();	// C를 잘 배웠다면 함수포인터로도 호출가능.
+
+	Test h;
+	h();	// C++을 배웠다면 h는 함수객체 -> h.operator()()
+
+	auto i = []() {cout << "나는 람다" << endl;};
+	cout << typeid(i).name() << endl;
+	i();
+
+	save();
+}

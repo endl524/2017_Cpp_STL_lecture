@@ -1,0 +1,30 @@
+
+
+===================
+Mon Mar 27 19:38:56 2017
+===================
+
+
+// 2017 1 STL 17.3.27 월
+
+#include <iostream>
+#include <vector>
+#include "save.h"
+using namespace std;
+
+int gid { 0 };
+
+// Lambda - 이름없는 함수.
+// 영역화된 열거형.
+
+int main()
+{
+	// () - function call operator
+	[]() {
+		cout << "Hello, World!" << endl;
+	}();	// 정의 후 끝에서 한번 호출 할 수 있다.
+
+	
+	
+	save();
+}

@@ -1,0 +1,26 @@
+
+
+===================
+Tue Apr 11 19:00:18 2017
+===================
+
+
+// 2017 1 STL 17.4.11 화
+
+// 6장.
+
+#include <iostream>
+#include <vector>
+#include "save.h"
+using namespace std;
+
+
+int main()
+{
+	vector<int> v;
+	cout << sizeof(v) << endl;
+	v.size();	// 원소의 갯수
+	v.data();	// HEAP에 잡은 메모리
+	v.capacity();	// 재할당 없이 담을 수 있는 갯수
+	save();
+}
